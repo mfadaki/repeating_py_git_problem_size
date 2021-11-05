@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=newest}
+
+\usepackage{filecontents}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\begin{document}
+
+\begin{figure}[h]
+    \centering
+    %{\pgfplotsset{xmin=0, xmax=50, ymin=1, ymax=4000000} %Use this to show some part of the data or changing the min/max values for x and y. Putting this inside the 'axix' does not work. NOTE: there is a '}' after \end{tikzpicture} which is related to this command.
+    \begin{tikzpicture}[scale=0.7, every node/.style={transform shape}]
+    \pgfplotsset{ every non boxed x axis/.append style={x axis line style=-} } %Remove arrow x axis
+    \pgfplotsset{ every non boxed x axis/.append style={x axis line style=-},
+         every non boxed y axis/.append style={y axis line style=-}} %Remove arrow both axis
+    \begin{axis}[
+        %width=0.8\textwidth,
+        %height=0.6\textwidth,
+        scaled x ticks = false, %scientific 10e....
+        scaled y ticks = true,
+        scaled y ticks=base 10:-3, %If by default '000' is not considered for scientific multiplier, this line forces to use the scientific notation.
+        ticklabel style = {font=\scriptsize}, %Change the font size of axis values
+        x axis line style={<->, color=black}, % arrows on the axis
+        y axis line style={-},
+        axis lines = left, %remove the right line of axis
+        %title=My First Graph,
+        xlabel = $t$ (day),
+        ytick scale label code/.code={Residual risk $(.10^{#1})$}, %scientific 10e.... The next line should exist to make the y lable vertical.
+        every y tick scale label/.style={at={(yticklabel cs:0.5)}, anchor = south, rotate = 90},
+        ylabel = {},
+        %ylabel = {$\sum\limits_{i, j \in D} y_{ij}$},
+        %ylabel = {$No \; of \; Vaccines$ $(10^{#1})$},
+        label style={font=\scriptsize},
+        %legend pos= north west,
+        legend style={fill=white, draw=white, font=\scriptsize, row sep=0.5cm},
+        xmax=100,
+        ymax=4e3,
+    ]
+    
+    \addplot[blue, very thick, mark=*, mark options={fill=white, solid, scale=0.6}] table[x=t, y=t14, col sep=comma] {risk_multi_compare_t.csv};
+    %\addplot[red, very thick, mark=*, mark options={fill=white, solid, scale=0.6}] table[x=t, y=t10, col sep=comma] {risk_multi_compare_t.csv};
+    %\addplot[green, very thick, mark=*, mark options={fill=white, solid, scale=0.6}] table[x=t, y=t6, col sep=comma] {risk_multi_compare_t.csv};
+
+    %\addplot[cyan, very thick, mark=square*, mark options={fill=white, solid, scale=0.6}] table[x=c, y=n, col sep=comma] {./data/data.csv};
+    
+    %\legend{Daily Transshipment}
+    \end{axis}
+    \end{tikzpicture}
+    %}
+    \caption{Residual risk.} 
+    \label{fig_y}
+    \end{figure} 
+
+\end{document}
