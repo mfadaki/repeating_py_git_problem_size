@@ -45,7 +45,7 @@ gap_stop = 1e-4  # 0.01 for 1% and 0.1 for 10% Our default = 1e-4
 run_time = 3 * 60 * 60
 
 # %% Parameters
-i = 100  # no of demand points
+i = 200  # no of demand points
 j = 5  # no of risk clusters
 t = 60
 # pop = 6861925
