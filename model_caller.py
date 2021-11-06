@@ -47,7 +47,6 @@ list_of_files = glob.glob("./results/n_ij/*.json")
 latest_json_file = max(list_of_files, key=os.path.getctime)
 print(latest_json_file)
 
-
 print(list_of_files)
 
 print(list_of_files[0])
