@@ -3,7 +3,6 @@
 # If number of solutions in the first function is not right, set the number of json solutions manually in line after 40
 # change the parameter name in the last function. for n-ij, we need to select nd_ijt
 
-
 # import numpy as np
 # import scipy as cp
 # import pandas as pd
@@ -13,11 +12,12 @@
 # import json
 # from json import JSONEncoder
 
+from functions.import_planning import *
 path = "./results/results_t6/solutions/"
 
-from functions.import_planning import *
 
 # Selct the most recent JSON file in the 'results' directory
+
 def no_sol_fn():
     import glob
     import os
@@ -41,6 +41,8 @@ print(no_solions)
 no_solions = 25  # Use it if we want to manually set the no of solutions
 
 # Get total time ...
+
+
 def t_tot_fn(no_solions):
     t_total = 0
     with open(path + "0.json", "r") as read_file:
@@ -76,15 +78,15 @@ def risk_fn(t_total):
         t = sol_json["t"]
 
         if t >= daily_period:
-            risk_multi[c_period : c_period + daily_period] = np.asarray(
+            risk_multi[c_period: c_period + daily_period] = np.asarray(
                 sol_json["risk"]
             )[:daily_period]
             c_period += daily_period
         else:
             if t == 1:
-                risk_multi[c_period : c_period + t] = np.asarray(sol_json["risk"])
+                risk_multi[c_period: c_period + t] = np.asarray(sol_json["risk"])
             else:
-                risk_multi[c_period : c_period + t] = np.asarray(sol_json["risk"])[:t]
+                risk_multi[c_period: c_period + t] = np.asarray(sol_json["risk"])[:t]
             c_period += t
     return risk_multi
 
